@@ -21,6 +21,14 @@ class PostPolicy < ApplicationPolicy
   end
 
   # Autobot: Permitted Attributes
+def permitted_attributes
+                  #add_here
+if user.admin?
+              [:title, :body, :user_id]
+              else
+                []
+               end
+                end
 
 
 

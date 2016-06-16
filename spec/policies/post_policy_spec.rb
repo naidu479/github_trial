@@ -14,6 +14,9 @@ it { should permit_action(:update) }
 it { should permit_action(:show) }
 it { should permit_action(:create) }
                           # Attribute Specs :: Admin
+it { should permit_mass_assignment_of(:user_id) }
+it { should permit_mass_assignment_of(:body) }
+it { should permit_mass_assignment_of(:title) }
                         end
 
 end

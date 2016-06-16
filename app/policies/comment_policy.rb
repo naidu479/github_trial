@@ -21,6 +21,14 @@ class CommentPolicy < ApplicationPolicy
   end
 
   # Autobot: Permitted Attributes
+def permitted_attributes
+                  #add_here
+if user.admin?
+              [:text, :user_id, :post_id]
+              else
+                []
+               end
+                end
 
 
 
