@@ -3,7 +3,7 @@ class Api::V1::Users::SessionsController < Api::V1::BaseController
   skip_before_filter :authenticate_user_from_token!, :only => [:create]
 
   def create
-    @user = User.find_for_database_authentication(email: signin_parameters[:email])
+    @user = User.find_for_database_authentication(signin_parameters)
     return user_not_found unless @user
    
     if @user.valid_password?(signin_parameters[:password])
@@ -31,7 +31,7 @@ class Api::V1::Users::SessionsController < Api::V1::BaseController
   end
 
   def signin_parameters
-    params.require(:user).permit( :email, :password, :device_id)
+    params.require(:user).permit( :email, :username, :password, :device_id)
   end
 
   def invalid_login_attempt

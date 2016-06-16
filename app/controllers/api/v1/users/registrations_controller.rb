@@ -66,7 +66,7 @@ class Api::V1::Users::RegistrationsController < Api::V1::BaseController
   end
 
   def signup_parameters
-    params.require(:user).permit( :email,:password, :password_confirmation, :device_id,:social_auth =>[:provider,:access_token,:uid,:email])
+    params.require(:user).permit( :email, :username, :password, :password_confirmation, :device_id,:social_auth =>[:provider,:access_token,:uid,:email])
   end
 end
 
