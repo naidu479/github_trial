@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :identities, dependent: :destroy
 
   # Autocode: Validations
+  validates_presence_of :name
 
   validates_presence_of   :email, if: :email_required?
   validates_uniqueness_of :email, allow_blank: true, if: :email_changed?
