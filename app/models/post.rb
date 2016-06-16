@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   # File Upload
 
   # Autocode: Validations
+  validates_presence_of :title
 
   # Autocode: Callbacks
 
