@@ -3,19 +3,21 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   # GET /posts
   def index
-    @posts = Post.page(params[:page]).per(params[:per])
+    @posts = policy_scope(Post).page(params[:page]).per(params[:per])
 
     render json: @posts
   end
 
   # GET /posts/1
   def show
+    authorize @post
     render json: @post
   end
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(permitted_attributes(Post.new))
+    authorize @post #Authorizing
 
     if @post.save
       render json: @post, status: :created
@@ -26,7 +28,8 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
+    authorize @post
+    if @post.update(permitted_attributes(@post))
       render json: @post
     else
       render json: @post.errors, status: :unprocessable_entity
@@ -35,6 +38,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   # DELETE /posts/1
   def destroy
+    authorize @post
     @post.destroy
   end
 
@@ -45,7 +49,4 @@ class Api::V1::PostsController < Api::V1::BaseController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def post_params
-       params.require(:post).permit()
-    end
 end

@@ -4,20 +4,22 @@ class Api::V1::CommentsController < Api::V1::BaseController
   # GET /comments
   def index
     @post = Post.find(params[:post_id]) #Get the post object
-    @comments = @post.comments.page(params[:page]).per(params[:per])
+    @comments = policy_scope(@post.comments).page(params[:page]).per(params[:per])
 
     render json: @comments
   end
 
   # GET /comments/1
   def show
+    authorize @comment
     render json: @comment
   end
 
   # POST /comments
   def create
     @post = Post.find(params[:post_id]) #Get the post
-    @comment = @post.comments.new(comment_params)
+    @comment = @post.comments.new(permitted_attributes(Comment.new))
+    authorize @comment #Authorizing
 
     if @comment.save
       render json: @comment, status: :created
@@ -28,7 +30,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
 
   # PATCH/PUT /comments/1
   def update
-    if @post.comments.update(comment_params)
+    authorize @comment
+    if @post.comments.update(permitted_attributes(@comment))
       render json: @comment
     else
       render json: @comment.errors, status: :unprocessable_entity
@@ -37,6 +40,7 @@ class Api::V1::CommentsController < Api::V1::BaseController
 
   # DELETE /comments/1
   def destroy
+    authorize @comment
     @post.comments.destroy
   end
 
@@ -48,7 +52,4 @@ class Api::V1::CommentsController < Api::V1::BaseController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def comment_params
-       params.require(:comment).permit()
-    end
 end
