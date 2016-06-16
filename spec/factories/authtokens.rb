@@ -5,6 +5,6 @@ FactoryGirl.define do
     sign_in_ip ""
     user_agent "MyString"
     device_id "MyString"
-    user nil
+    user 
   end
 end
