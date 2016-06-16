@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
         :recoverable, :rememberable, :trackable 
 
   # Autocode: Relationships
+  has_many :comments
   has_many :posts
   
   has_many :authtokens, dependent: :destroy
