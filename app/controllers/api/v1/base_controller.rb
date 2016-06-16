@@ -2,6 +2,9 @@
 require "#{Rails.root}/lib/errors/errors.rb"
 
 class Api::V1::BaseController < ActionController::API
+include Pundit
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
   rescue_from Errors::Errors, with: :render_error
 
   before_action :set_default_response_format,:authenticate_user_from_token!

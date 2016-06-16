@@ -1,6 +1,7 @@
 class Api::V1::Users::RegistrationsController < Api::V1::BaseController
 
   skip_before_filter :authenticate_user_from_token!, :only => [:create]
+skip_after_action :verify_authorized
 
   def create
     if signup_parameters[:social_auth]

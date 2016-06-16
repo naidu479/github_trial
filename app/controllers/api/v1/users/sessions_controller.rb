@@ -1,6 +1,7 @@
 class Api::V1::Users::SessionsController < Api::V1::BaseController
 
   skip_before_filter :authenticate_user_from_token!, :only => [:create]
+skip_after_action :verify_authorized
 
   def create
     @user = User.find_for_database_authentication(signin_parameters)

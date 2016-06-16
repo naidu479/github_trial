@@ -14,6 +14,7 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'pundit/matchers'
 require 'webmock/rspec'
 require 'support/request_helper'
 RSpec.configure do |config|

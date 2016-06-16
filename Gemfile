@@ -22,6 +22,7 @@ gem 'puma', '~> 3.0'
 # gem 'rack-cors'
 
 group :development, :test do
+gem 'pundit-matchers', '~> 1.0.2'
   gem 'rspec-rails', '~> 3.1.0'
   gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,3 +62,5 @@ end
 
 
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
+
+gem 'pundit'
