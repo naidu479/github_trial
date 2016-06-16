@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	let(:user) { FactoryGirl.build(:user) }
+
+	context 'validations' do
+		#addhere
+    it { expect(user).to validate_presence_of(:name) }
+	end
 end

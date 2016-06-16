@@ -9,6 +9,7 @@ class Comment < ApplicationRecord
   # File Upload
 
   # Autocode: Validations
+  validates_presence_of :text
 
   # Autocode: Callbacks
 

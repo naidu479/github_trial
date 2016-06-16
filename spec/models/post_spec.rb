@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Post, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	let(:post) { FactoryGirl.build(:post) }
+
+	context 'validations' do
+		#addhere
+    it { expect(post).to validate_presence_of(:body) }
+    it { expect(post).to validate_presence_of(:title) }
+	end
 end
