@@ -58,3 +58,6 @@ group :test do
   gem 'database_cleaner'
   gem 'faker'
 end
+
+
+gem 'devise', git: 'https://github.com/plataformatec/devise.git'
